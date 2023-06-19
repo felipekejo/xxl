@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+  OWNER
+}
+
+model User {
+  id                    String  @id @default(uuid())
+  first_name            String
+  last_name             String
+  email                 String  @unique
+  password_hash         String
+  role                  Role    @default(CUSTOMER)
+  reset_key             String? @unique
+  key_date DateTime?
+
+  orders Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id       String @id @default(uuid())
+  stripeId String
+
+  category Category @relation(fields: [category_name], references: [name])
+
+  orders        Order[]
+  category_name String
+
+  @@map("products")
+}
+
+model Phone {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  services Service[]
+
+  @@map("phones")
+}
+
+model Service {
+  id      String @id @default(uuid())
+  name    String
+  price   String
+  Phone   Phone  @relation(fields: [phoneId], references: [id])
+  phoneId String
+
+  @@map("services")
+}
+
+model Repair {
+  id                 String  @id @default(uuid())
+  title              String
+  problemDescription String
+  contact            String?
+  serviceId          String?
+
+  @@map("repairs")
+}
+
+model Order {
+  id         String  @id @default(uuid())
+  user       User    @relation(fields: [user_id], references: [id])
+  user_id    String
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id String
+
+  @@map("orders")
+}
+
+model Category {
+  name    String    @unique
+  Product Product[]
+
+  @@id(name)
+  @@map("categories")
+}

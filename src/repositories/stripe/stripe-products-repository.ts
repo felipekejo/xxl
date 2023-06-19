@@ -22,10 +22,7 @@ export class StripeProductsRepository implements ProductsRepository {
         imageUrl: product.images,
         unitLabel: product.unit_label,
         priceId: price.id,
-        price: new Intl.NumberFormat("en-AU", {
-          style: "currency",
-          currency: "AUD",
-        }).format(price.unit_amount === null ? 0 : price.unit_amount / 100), // Format the price as a currency string
+        price: price.unit_amount === null ? 0 : price.unit_amount / 100,
       };
     });
 
@@ -50,10 +47,7 @@ export class StripeProductsRepository implements ProductsRepository {
       imageUrl: product.images,
       unitLabel: product.unit_label,
       priceId: price.id,
-      price: new Intl.NumberFormat("en-AU", {
-        style: "currency",
-        currency: "AUD",
-      }).format(price.unit_amount === null ? 0 : price.unit_amount / 100), // Format the price as a currency string
+      price: price.unit_amount === null ? 0 : price.unit_amount / 100, // Format the price as a currency string
       description: product.description,
     };
 
@@ -75,10 +69,7 @@ export class StripeProductsRepository implements ProductsRepository {
         imageUrl: product.images,
         unitLabel: product.unit_label,
         priceId: price.id,
-        price: new Intl.NumberFormat("en-AU", {
-          style: "currency",
-          currency: "AUD",
-        }).format(price.unit_amount === null ? 0 : price.unit_amount / 100), // Format the price as a currency string
+        price: price.unit_amount === null ? 0 : price.unit_amount / 100,
       };
     });
 

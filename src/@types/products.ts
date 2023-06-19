@@ -3,7 +3,7 @@ export interface Products {
   name: string;
   imageUrl: string[];
   unitLabel: string | null | undefined;
-  price: string;
+  price: number;
   priceId: string;
 }
 
@@ -13,11 +13,11 @@ export interface Product {
   imageUrl: string[];
   unitLabel: string | null | undefined;
   description: string | null;
-  price: string;
+  price: number;
   priceId: string;
 }
 
 export interface LineItems {
-  price: string;
+  price: number;
   quantity: number;
 }

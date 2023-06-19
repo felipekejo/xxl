@@ -22,6 +22,7 @@ import { updateService } from "./controllers/updateService";
 import { grantAdminRights } from "./controllers/grantAdminRights";
 import { removeAdminRights } from "./controllers/removeAdminRights";
 import { checkOut } from "./controllers/checkOutSession";
+import { getOrders } from "./controllers/orders";
 
 // import { sendMailMethod } from "./controllers/sendMailMethod";
 
@@ -86,4 +87,6 @@ export async function appRoutes(app: FastifyInstance) {
   // app.post("/send", sendMailMethod);
 
   app.post("/session-checkout", checkOut);
+
+  app.get("/orders", getOrders);
 }
